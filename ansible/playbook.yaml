@@ -1,0 +1,150 @@
+#################################################
+# DO Community Playbooks: Docker
+#################################################
+---
+- hosts: all
+  become: true
+  remote_user: ubuntu
+  vars_files:
+    - vars/default.yml
+
+
+# UPGRADE APT package manager
+
+
+
+
+  tasks:
+
+    - name: Update and upgrade apt packages
+      become: true
+      apt:
+        upgrade: yes
+        update_cache: yes
+        cache_valid_time: 86400 #One day
+
+
+    - name: Install apache2 using apt
+      apt:  name=apache2 state=present
+
+    - name: LibApache PHP install
+      apt: name=libapache2-mod-php state=present
+
+
+    - name: LibApache PHP install
+      apt: name=wordpress state=present
+
+    - name: php install
+      apt: name=php state=present
+
+    - name: PHP MYSQL install
+      apt: name=php-mysql state=present
+
+#MYSQL client required
+    - name: Install MYSSQL using apt
+      apt:  name=mysql-client state=present
+
+    - name:  start Apache
+      service: name=apache2 state=started enabled=yes
+
+
+
+###### MYSQL CLIENT REQUIRED TO COMMUNICATE WITH THE DOCKER WPSQL CONTAINER
+    - name:
+      apt: 
+
+#How does this work?
+#    - name:  install Hello World PHP script
+#      copy: src=index.php dest=/var/www/index.php mode=0664
+###########################################################
+#FILE TRANSFER
+##########################################################
+
+    - name: transfer wordpress conf from src directory to /etc/apache2/sites-available/
+      copy:
+        src: "src/wordpress.conf"
+        owner: root
+        group: root
+        mode: 644
+        dest: /etc/apache2/sites-available/
+ ## attributes that are passed to the module
+
+#######################################################
+#Enable WP and bounce SOME SERVICES
+######################################################
+
+    - name: apache2 site enabler for WP 
+      become: true
+      become_user: root
+      shell:  sudo a2ensite wordpress
+
+    - name: sudo a2enmod rewrite 
+      become: true
+      become_user: root
+      shell: sudo a2enmod rewrite
+
+
+    - name:  start Apache
+      service: name=apache2 state=restarted enabled=yes
+
+
+
+
+##########################################################
+#     D O C K E R      I N S T A L #
+##########################################################
+    - name: Install aptitude using apt
+      apt: name=aptitude state=latest update_cache=yes force_apt_get=yes
+
+    - name: Install required system packages
+      apt: name={{ item }} state=latest update_cache=yes
+      loop: [ 'apt-transport-https', 'ca-certificates', 'curl', 'software-properties-common', 'python3-pip', 'virtualenv', 'python3-setuptools']
+
+    - name: Add Docker GPG apt Key
+      apt_key:
+        url: https://download.docker.com/linux/ubuntu/gpg
+        state: present
+
+    - name: Add Docker Repository
+      apt_repository:
+        repo: deb https://download.docker.com/linux/ubuntu bionic stable
+        state: present
+
+    - name: Update apt and install docker-ce
+      apt: update_cache=yes name=docker-ce state=latest
+
+    - name: Install Docker Module for Python
+      pip:
+        name: docker
+
+    - name: Pull default Docker image
+      docker_image:
+        name: "{{ default_container_image }}"
+        source: pull
+
+    # Creates the number of containers defined by the variable create_containers, using values from vars file
+    - name: Create default containers
+      docker_container:
+        name: "{{ default_container_name }}{{ item }}"
+        image: "{{ default_container_image }}"
+        command: "{{ default_container_command }}"
+        state: present
+        ports:
+          - "{{ src_port }}:{{ dest_port }}
+      with_sequence: count={{ create_containers }}
+
+
+
+
+###################################################
+#DATABASE CONFIG 
+############################################
+#Create directory for docker
+    - name: Creates directory
+      file:
+        path: "/root/docker/{{ default_container_name }}/conf.d"
+        state: directory
+
+
+
+#sudo docker logs wpsql 2>&1 | grep GENERATED |  awk -F" " '{print$5}'
