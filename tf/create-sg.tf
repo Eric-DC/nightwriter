@@ -20,9 +20,9 @@ resource "aws_security_group" "sg" {
     security_groups  = []
     self             = false
  
-  }]
+  },
 
-  ingress = [{
+ {
     description      = "My webtraffic"
     protocol         = var.sg_traffic_proto
     from_port        = var.sg_traffic_port
