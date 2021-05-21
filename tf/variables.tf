@@ -62,7 +62,7 @@ variable "sg_ingress_ssh" {
 variable "sg_traffic_proto" {
   description = "Protocal used for the ingress rule"
   type        = string
-  default     = "http"
+  default     = "tcp"
 }
 
 
