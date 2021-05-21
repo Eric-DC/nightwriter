@@ -13,12 +13,12 @@ For Fun && || Profit
 
 SETUP/PREREQUISITES:
 
--*nix makes it easier
--python3 & ansible installed #Refer to ansible_venv_setup.sh
--aws cli configued with credentials
--a existing key/pair within aws
--A domain name registered with the ability to modify it's records. 
--An install of terraform https://www.terraform.io/
+- *nix makes it easier
+- python3 & ansible installed #Refer to ansible_venv_setup.sh
+- aws cli configued with credentials
+- a existing key/pair within aws
+- A domain name registered with the ability to modify it's records. 
+- An install of terraform https://www.terraform.io/
 
 
 # Deployment procedure. 
