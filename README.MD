@@ -3,13 +3,9 @@ README.MD
 Nightwriter is a project with the goal of being able to rapidly deploy a wordpress site. 
 
 For Fun && || Profit  
-
-
-#This is an activce WIP. Things work
-#but the process could be more user friendly.
-#Complain about things not working.
-#I will try to make them work more better!
-######################################
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
+This procedure is a work in progress, if something can be made easier, let's make it easier.
+=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-
 
 SETUP/PREREQUISITES:
 
