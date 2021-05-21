@@ -18,9 +18,16 @@ SETUP/PREREQUISITES:
 
 
 # Deployment procedure. 
-you@computer:cd tf/
+Brief: 
+1.deploy terraform
+2.add domain name record to host's ip
+3.Deploy webserver/Docker mysql node via ansible
+4.create our user
+5.add our scripts
 # Apply terraform
 #It will prompt you for a deployment, update the config with the name of your aws key file that you should have the loaded on your machine in awscli
+you@computer:cd tf/
+
 you@computer:terraform apply
 #Now retrieve the publicip from the terraform statefile 
 #todo oneliner this
