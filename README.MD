@@ -26,8 +26,8 @@ Brief:
 5.add our scripts
 # Apply terraform
 #It will prompt you for a deployment, update the config with the name of your aws key file that you should have the loaded on your machine in awscli
-you@computer:cd tf/
 
+you@computer:cd tf/
 you@computer:terraform apply
 #Now retrieve the publicip from the terraform statefile 
 #todo oneliner this
@@ -38,7 +38,7 @@ you@computer: cd .. & cd ansible/
 you@computer: ansible-playbook  playbook.yaml -i hosts --key-file ~/.ssh/<yourkey>.pem
 #edit the ansible config src/default.yml updating the defaultdomain with your youdomainnamee.com ensuring you have a host file
 
-#This should deploy evreything navigate to youdomainnamee.com 
+#This should deploy everything navigate to youdomainnamee.com 
 #Do the setup 
 
 #todo, posting script
