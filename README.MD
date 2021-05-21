@@ -3,9 +3,9 @@ README.MD
 Nightwriter is a project with the goal of being able to rapidly deploy a wordpress site. 
 
 For Fun && || Profit  
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-
-This procedure is a work in progress, if something can be made easier, let's make it easier.
-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=--=-=-
+
+# Disclaimer
+This procedure is a work in progress, if something can be made easier, let's make it easier; There has been little testing at this phase in development and the mainteiners of this repo provide this software "AS IS"
 
 SETUP/PREREQUISITES:
 
