@@ -17,7 +17,7 @@ variable "owner" {
 variable "aws_region_az" {
   description = "AWS region availability zone"
   type        = string
-  default     = "a"
+  default     = "b"
 }
  
  
@@ -57,7 +57,21 @@ variable "sg_ingress_ssh" {
   type        = string
   default     = "22"
 }
- 
+
+#For general inbound traffic
+variable "sg_traffic_proto" {
+  description = "Protocal used for the ingress rule"
+  type        = string
+  default     = "http"
+}
+
+
+variable "sg_traffic_port" {
+  description = "Port used for the ingress rule"
+  type        = string
+  default     = "80"
+}
+
 variable "sg_egress_proto" {
   description = "Protocol used for the egress rule"
   type        = string

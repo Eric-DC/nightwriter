@@ -21,6 +21,19 @@ resource "aws_security_group" "sg" {
     self             = false
  
   }]
+
+  ingress = [{
+    description      = "My webtraffic"
+    protocol         = var.sg_traffic_proto
+    from_port        = var.sg_traffic_port
+    to_port          = var.sg_traffic_port
+    cidr_blocks      = ["0.0.0.0/32"]
+    ipv6_cidr_blocks = []
+    prefix_list_ids  = []
+    security_groups  = []
+    self             = false
+ 
+  }]
  
   egress = [{
     description      = "All traffic"
